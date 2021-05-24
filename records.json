@@ -1,0 +1,40 @@
+{
+  "results": [
+    {
+      "name": "早餐",
+      "category": "餐飲食品",
+      "date": "2021/05/19",
+      "amount": 60
+    },
+    {
+      "name": "午餐",
+      "category": "餐飲食品",
+      "date": "2021/05/19",
+      "amount": 180
+    },
+    {
+      "name": "晚餐",
+      "category": "餐飲食品",
+      "date": "2021/05/19",
+      "amount": 150
+    },
+    {
+      "name": "高鐵",
+      "category": "交通出行",
+      "date": "2021/05/20",
+      "amount": 1480
+    },
+    {
+      "name": "登山鞋",
+      "category": "休閒娛樂",
+      "date": "2021/05/20",
+      "amount": 5390
+    },
+    {
+      "name": "衛生紙",
+      "category": "家居物業",
+      "date": "2021/05/21",
+      "amount": 99
+    }
+  ]
+}

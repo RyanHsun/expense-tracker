@@ -23,3 +23,4 @@ const recordSchema = new Schema({
   }
 })
 module.exports = mongoose.model('Record', recordSchema)
+
