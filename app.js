@@ -26,7 +26,7 @@ app.set('view engine', 'hbs')
 // Body-Parser 設定
 app.use(bodyParser.urlencoded({ extended: true }))
 
-// 路由設定
+// 設定瀏覽所有支出的路由
 app.get('/', (req, res) => {
   Record
     .find()
@@ -35,6 +35,7 @@ app.get('/', (req, res) => {
     .catch(error => console.error(error))
 })
 
+// 設定新增一筆支出的路由 Create
 app.get('/records/new', (req, res) => {
   Category
     .find()
@@ -44,13 +45,41 @@ app.get('/records/new', (req, res) => {
 })
 app.post('/records', (req,res) => {
   const record = req.body
-  // console.log(record)
   return Record
     .create( record )
     .then(() => res.redirect('/'))
     .catch(error => console.error(error))
 })
 
+// 設定編輯特定支出的路由 Update
+app.get('/records/:id/edit', (req,res) => {
+  const id = req.params.id
+  return Record
+    .findById(id)
+    .lean()
+    .then((record) => {
+      Category
+        .find()
+        .lean()
+        .then(categories => res.render('edit', { record, categories }))
+        .catch(error => console.error(error))
+    })
+    .catch(error => console.error(error))
+})
+app.post('/todos/:id/edit', (req,res) => {
+  const id = req.params.id
+  return Record
+    .findById(id)
+    .then(record => {
+      record.name = req.body.name
+      record.category = req.body.category
+      record.date = req.body.date
+      record.amount = req.body.amount
+      return record.save()
+    })
+    .then(() => res.redirect('/'))
+    .catch(error => console.error(error))
+})
 
 
 // 伺服器監聽

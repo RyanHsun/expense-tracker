@@ -1,0 +1,13 @@
+<form action="/records/{{ record._id }}/edit" method="POST">
+  <input type="text" placeholder="name" name="name" value="{{ record.name }}">
+  <select name="category" id="category">
+    <option value="{{ record.category }}" disabled selected>{{ record.category }}</option>
+    {{#each categories}}
+    <option value="{{ this.name }}">{{ this.name }}</option>
+    {{/each}}
+  </select>
+  <input type="text" placeholder="date" name="date" value="{{ record.date }}">
+  <input type="text" placeholder="amount" name="amount" value="{{ record.amount }}">
+  <button type="submit">儲存</button>
+  <a href="/">返回</a>
+</form>

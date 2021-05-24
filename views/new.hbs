@@ -3,7 +3,7 @@
   <select name="category" id="category">
     <option value="" disabled selected hidden>選擇分類</option>
     {{#each categories}}
-    <option value="{{this.name}}">{{this.name}}</option>
+    <option value="{{ this.name }}">{{ this.name }}</option>
     {{/each}}
   </select>
   <input type="text" placeholder="date" name="date">
