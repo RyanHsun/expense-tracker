@@ -1,7 +1,9 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
 const Record = require('./models/record')
+const Category = require('./models/category')
 
 const app = express()
 const port = 3000
@@ -21,6 +23,9 @@ db.once('open', () => {
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
+// Body-Parser 設定
+app.use(bodyParser.urlencoded({ extended: true }))
+
 // 路由設定
 app.get('/', (req, res) => {
   Record
@@ -29,6 +34,24 @@ app.get('/', (req, res) => {
     .then(records => res.render('index', { records }))
     .catch(error => console.error(error))
 })
+
+app.get('/records/new', (req, res) => {
+  Category
+    .find()
+    .lean()
+    .then(categories => res.render('new', { categories }))
+    .catch(error => console.error(error))
+})
+app.post('/records', (req,res) => {
+  const record = req.body
+  // console.log(record)
+  return Record
+    .create( record )
+    .then(() => res.redirect('/'))
+    .catch(error => console.error(error))
+})
+
+
 
 // 伺服器監聽
 app.listen(port, (req, res) => {
