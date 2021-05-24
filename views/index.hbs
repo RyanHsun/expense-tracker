@@ -1,1 +1,10 @@
-<h1>這是 ＩＮＤＥＸ！</h1>
+<ul>
+  {{#each records}}
+    <li>
+      {{this.name}} -
+      {{this.category}} -
+      {{this.date}}  -
+      ${{this.amount}}
+    </li>
+  {{/each}}
+</ul>
