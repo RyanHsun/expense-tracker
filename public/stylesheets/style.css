@@ -1,6 +1,9 @@
 .total-amount strong{
   font-size: xxx-large;
 }
+.new-btn {
+  font-size: 24px;
+}
 .category-icon {
   font-size: xx-large;
   width: 100px;

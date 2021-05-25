@@ -3,12 +3,12 @@
   <form action="/records" method="POST">
     <ul class="list-group mb-3">
       <li class="list-group-item shadow-sm d-flex justify-content-around align-items-center">
-        <h5 class="m-2">名稱</h5>
-        <input class="col-6" type="text" placeholder="名稱" name="name" required>
+        <label for="name"><h5 class="m-2">名稱</h5></label>
+        <input class="col-6 form-control" id="name" type="text" placeholder="你又把$$$變成什麼形狀了XD" name="name" required>
       </li>
       <li class="list-group-item shadow-sm d-flex justify-content-around align-items-center">
-        <h5 class="m-2">分類</h5>
-        <select name="category" class="col-6 p-2" id="category" required>
+        <label for="category"><h5 class="m-2">分類</h5></label>
+        <select class="col-6 p-2 form-control" id="category" name="category" required>
           <option value="" disabled selected>選擇支出分類</option>
           {{#each categories}}
           <option value="{{ this.name }}">{{ this.name }}</option>
@@ -16,17 +16,17 @@
         </select>
       </li>
       <li class="list-group-item shadow-sm d-flex justify-content-around align-items-center">
-        <h5 class="m-2">日期</h5>
-        <input class="col-6" type="date" placeholder="日期" name="date" required>
+        <label for="date"><h5 class="m-2">日期</h5></label>
+        <input class="col-6 form-control" id="date" type="date" placeholder="日期" name="date" required>
       </li>
       <li class="list-group-item shadow-sm d-flex justify-content-around align-items-center">
-        <h5 class="m-2">金額</h5>
-        <input class="col-6" type="number" placeholder="金額" name="amount" required>
+        <label for="amount"><h5 class="m-2">金額</h5></label>
+        <input class="col-6 form-control" id="amount" type="number" placeholder="金額" name="amount" required>
       </li>
     </ul>
     <div class="col-auto p-2 d-flex justify-content-center">
-      <a class="col-6 mr-2 btn btn-outline-secondary" href="/">返回</a>
-      <button class="col-6 btn btn-primary" type="submit">送出</button>
+      <a class="col-6 mr-2 btn btn-outline-info" href="/">返回</a>
+      <button class="col-6 btn btn-warning" type="submit">送出</button>
     </div>
   </form>
 </div>
