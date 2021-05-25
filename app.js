@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 const helpers = require('handlebars-helpers')()
 const Record = require('./models/record')
 const Category = require('./models/category')
@@ -27,15 +28,18 @@ app.set('view engine', 'hbs')
 // Body-Parser 設定
 app.use(bodyParser.urlencoded({ extended: true }))
 
+// Method-Override 設定
+app.use(methodOverride('_method'))
+
 // 設定瀏覽所有支出的路由
 app.get('/', (req, res) => {
   Record.find()
     .lean()
     .sort({ _id: 'desc' })
     .then(records => {
-      Category
-        .find()
+      Category.find()
         .lean()
+        .sort({ _id: 'asc' })
         .then(categories => res.render('index', { records, categories }))
         .catch(error => console.error(error))
     })
@@ -48,9 +52,9 @@ app.get('/filter', (req, res) => {
   Record.find({ category: category })
     .lean()
     .then(records => {
-      Category
-        .find()
+      Category.find()
         .lean()
+        .sort({ _id: 'asc' })
         .then(categories => {
           if (records == 0) {
             res.render('error', { categories, category })
@@ -64,9 +68,9 @@ app.get('/filter', (req, res) => {
 
 // 設定新增一筆支出的路由 Create
 app.get('/records/new', (req, res) => {
-  Category
-    .find()
+  Category.find()
     .lean()
+    .sort({ _id: 'asc' })
     .then(categories => res.render('new', { categories }))
     .catch(error => console.error(error))
 })
@@ -83,9 +87,9 @@ app.get('/records/:id/edit', (req,res) => {
   return Record.findById(id)
     .lean()
     .then((record) => {
-      Category
-        .find()
+      Category.find()
         .lean()
+        .sort({ _id: 'asc' })
         .then(categories => res.render('edit', { record, categories }))
         .catch(error => console.error(error))
     })
