@@ -7,6 +7,7 @@ const helpers = require('handlebars-helpers')()
 const Record = require('./models/record')
 const Category = require('./models/category')
 
+const routes = require('./routes')
 const app = express()
 const port = 3000
 
@@ -31,92 +32,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // Method-Override 設定
 app.use(methodOverride('_method'))
 
-// 設定瀏覽所有支出的路由
-app.get('/', (req, res) => {
-  Record.find()
-    .lean()
-    .sort({ _id: 'desc' })
-    .then(records => {
-      Category.find()
-        .lean()
-        .sort({ _id: 'asc' })
-        .then(categories => res.render('index', { records, categories }))
-        .catch(error => console.error(error))
-    })
-    .catch(error => console.error(error))
-})
-
-// 設定使用分類篩選支出的路由
-app.get('/filter', (req, res) => {
-  const category = req.query.category
-  Record.find({ category: category })
-    .lean()
-    .then(records => {
-      Category.find()
-        .lean()
-        .sort({ _id: 'asc' })
-        .then(categories => {
-          if (records == 0) {
-            res.render('error', { categories, category })
-          } else {
-            res.render('index', { records, categories, category })
-          }
-        })
-    })
-    .catch(error => console.error(error))
-})
-
-// 設定新增一筆支出的路由 Create
-app.get('/records/new', (req, res) => {
-  Category.find()
-    .lean()
-    .sort({ _id: 'asc' })
-    .then(categories => res.render('new', { categories }))
-    .catch(error => console.error(error))
-})
-app.post('/records', (req,res) => {
-  const record = req.body
-  return Record.create( record )
-    .then(() => res.redirect('/'))
-    .catch(error => console.error(error))
-})
-
-// 設定編輯特定支出的路由 Update
-app.get('/records/:id/edit', (req,res) => {
-  const id = req.params.id
-  return Record.findById(id)
-    .lean()
-    .then((record) => {
-      Category.find()
-        .lean()
-        .sort({ _id: 'asc' })
-        .then(categories => res.render('edit', { record, categories }))
-        .catch(error => console.error(error))
-    })
-    .catch(error => console.error(error))
-})
-app.post('/todos/:id/edit', (req,res) => {
-  const id = req.params.id
-  return Record.findById(id)
-    .then(record => {
-      record.name = req.body.name
-      record.category = req.body.category
-      record.date = req.body.date
-      record.amount = req.body.amount
-      return record.save()
-    })
-    .then(() => res.redirect('/'))
-    .catch(error => console.error(error))
-})
-
-// 社刪除特定支出的路由
-app.post('/records/:id/delete', (req, res) => {
-  const id =  req.params.id
-  return Record.findById(id)
-    .then(record => record. remove())
-    .then(() => res.redirect('/'))
-    .catch(error => console.error(error))
-})
+// 設定路由
+app.use(routes)
 
 // 伺服器監聽
 app.listen(port, (req, res) => {
