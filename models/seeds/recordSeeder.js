@@ -5,8 +5,6 @@ const categories = require('../../categories.json')
 const db = require('../../config/mongoose')
 
 db.once('open', () => {
-  console.log('mongodb connected!')
-
   records.results.forEach( item => {
     const name = item.name
     const category = item.category
@@ -15,7 +13,7 @@ db.once('open', () => {
 
     return Record.create({ name, category, date, amount })
   })
-  console.log('import records done')
+  console.log('import records, done!')
   
   categories.results.forEach(item => {
     const name = item.name
@@ -24,5 +22,5 @@ db.once('open', () => {
 
     return Category.create({ name, name_en, icon })
   })
-  console.log('import categories done!')
+  console.log('import categories, done!')
 })
