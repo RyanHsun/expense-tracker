@@ -1,29 +1,29 @@
 {
   "results": [
     {
-      "id": 1,
       "name": "家居物業",
-      "name_en": "Home"
+      "name_en": "Home",
+      "icon": "fa-home"
     },
     {
-      "id": 2,
       "name": "交通出行",
-      "name_en": "Traffic"
+      "name_en": "Traffic",
+      "icon": "fa-shuttle-van"
     },
     {
-      "id": 3,
       "name": "休閒娛樂",
-      "name_en": "Entertainment"
+      "name_en": "Entertainment",
+      "icon": "fa-grin-beam"
     },
     {
-      "id": 4,
       "name": "餐飲食品",
-      "name_en": "Food"
+      "name_en": "Food",
+      "icon": "fa-utensils"
     },
     {
-      "id": 5,
       "name": "其他",
-      "name_en": "Other"
+      "name_en": "Other",
+      "icon": "fa-pen"
     }
   ]
 }

@@ -23,11 +23,13 @@ db.once('open', () => {
     return Record.create({ name, category, date, amount })
   })
   console.log('import records done')
+  
   categories.results.forEach(item => {
     const name = item.name
     const name_en = item.name_en
+    const icon = item.icon
 
-    return Category.create({ name, name_en })
+    return Category.create({ name, name_en, icon })
   })
   console.log('import categories done!')
 })

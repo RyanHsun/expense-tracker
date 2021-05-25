@@ -8,6 +8,10 @@ const categorySchema = new Schema({
   name_en: {
     type: String,
     requires: true
+  },
+  icon: {
+    type: String,
+    requires: true
   }
 })
 module.exports = mongoose.model('Category', categorySchema)
