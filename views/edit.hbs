@@ -1,13 +1,32 @@
-<form action="/records/{{ record._id }}?_method=PUT" method="POST">
-  <input type="text" placeholder="name" name="name" value="{{ record.name }}">
-  <select name="category" id="category">
-    <option value="{{ record.category }}" disabled selected>{{ record.category }}</option>
-    {{#each categories}}
-    <option value="{{ this.name }}">{{ this.name }}</option>
-    {{/each}}
-  </select>
-  <input type="text" placeholder="date" name="date" value="{{ record.date }}">
-  <input type="text" placeholder="amount" name="amount" value="{{ record.amount }}">
-  <button type="submit">儲存</button>
-  <a href="/">返回</a>
-</form>
+<div class="container col-4 mb-5">
+  <h1 class="text-center mb-5">編輯支出</h1>
+  <form action="/records/{{ record._id }}?_method=PUT" method="POST">
+    <ul class="list-group mb-3">
+      <li class="list-group-item shadow-sm d-flex justify-content-around align-items-center">
+        <h5 class="m-2">名稱</h5>
+        <input class="col-6 p-1" type="text" placeholder="name" name="name" value="{{ record.name }}" required>
+      </li>
+      <li class="list-group-item shadow-sm d-flex justify-content-around align-items-center">
+        <h5 class="m-2">分類</h5>
+        <select name="category" class="col-6 p-2" id="category" required>
+          <option value="{{ record.category }}" disabled selected>{{ record.category }}</option>
+          {{#each categories}}
+          <option value="{{ this.name }}" {{#if (match ../record.category this.name)}}selected{{/if}}>{{ this.name }}</option>
+          {{/each}}
+        </select>
+      </li>
+      <li class="list-group-item shadow-sm d-flex justify-content-around align-items-center">
+        <h5 class="m-2">日期</h5>
+        <input class="col-6 p-1" type="date" placeholder="date" name="date" value="{{ record.date }}" required>
+      </li>
+      <li class="list-group-item shadow-sm d-flex justify-content-around align-items-center">
+        <h5 class="m-2">金額</h5>
+        <input class="col-6 p-1" type="number" placeholder="amount" name="amount" value="{{ record.amount }}" required>
+      </li>
+    </ul>
+    <div class="col-auto p-2 d-flex justify-content-center">
+      <a class="col-6 mr-2 btn btn-outline-success" href="/">返回</a>
+      <button class="col-6 btn btn-success" type="submit">儲存</button>
+    </div>
+  </form>
+</div>

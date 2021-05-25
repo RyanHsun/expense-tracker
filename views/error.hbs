@@ -1,15 +1,30 @@
-<form id="filter" action="/filters">
-  <div class="input-group">
-    <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon" name="category"
-      id="category" onchange="submit();">
-      <option value="{{ category }}" disabled selected>使用分類篩選</option>
-      {{#each categories}}
-      <option value="{{ this.name }}" {{#if (match ../category this.name)}}selected{{/if}}>{{ this.name }}</option>
-      {{/each}}
-    </select>
+<div class="container col-6 mb-5">
+  <div class="row mt-3 mb-4">
+    <div class="col-auto mr-auto">
+      <a class="btn btn-primary" href="./records/new">新增支出</a>
+    </div>
+    <div class="col-5 ml-auto">
+      <form id="filter" action="/filters">
+        <div class="input-group">
+          <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon"
+            name="category" id="category" onchange="submit();">
+            <option value="{{ category }}" disabled selected>使用分類篩選</option>
+            {{#each categories}}
+            <option value="{{ this.name }}" {{#if (match ../category this.name)}}selected{{/if}}>{{ this.name }}
+            </option>
+            {{/each}}
+          </select>
+        </div>
+      </form>
+    </div>
   </div>
-</form>
-
-<p>在 <strong>{{ category }}</strong> 這個分類底下，沒有找到相關支出資料。</p>
-
-<a href="./records/new">新增支出</a>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-auto m-auto">
+          <p class="mb-0">在 <strong>{{ category }}</strong> 這個分類底下，沒有找到相關支出資料。</p>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

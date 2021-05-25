@@ -32,7 +32,7 @@ router.get('/:id/edit', (req, res) => {
     })
     .catch(error => console.error(error))
 })
-router.put('/:id/edit', (req, res) => {
+router.put('/:id', (req, res) => {
   const id = req.params.id
   return Record.findById(id)
     .then(record => {
@@ -47,7 +47,7 @@ router.put('/:id/edit', (req, res) => {
 })
 
 // 設定刪除特定支出的路由 Delete
-router.delete('/:id/delete', (req, res) => {
+router.delete('/:id', (req, res) => {
   const id = req.params.id
   return Record.findById(id)
     .then(record => record.remove())

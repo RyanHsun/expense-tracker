@@ -7,7 +7,7 @@ const Category = require('../../models/category')
 router.get('/', (req, res) => {
   Record.find()
     .lean()
-    .sort({ _id: 'desc' })
+    .sort({ date: 'desc' })
     .then(records => {
       Category.find()
         .lean()

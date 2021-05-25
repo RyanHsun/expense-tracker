@@ -1,33 +1,49 @@
-<form id="filter" action="/filters">
-  <div class="input-group">
-    <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon" name="category"
-      id="category" onchange="submit();">
-      <option value="{{ category }}" disabled selected>使用分類篩選</option>
-      {{#each categories}}
-      <option value="{{ this.name }}" {{#if (match ../category this.name)}}selected{{/if}}>{{ this.name }}</option>
-      {{/each}}
-    </select>
-  </div>
-</form>
-<ul>
-  {{#each records}}
-    <li>
-      {{#if (eq this.category '家居物業')}}<i class="fas fa-home"></i>{{/if}}
-      {{#if (eq this.category '交通出行')}}<i class="fas fa-shuttle-van"></i>{{/if}}
-      {{#if (eq this.category '休閒娛樂')}}<i class="fas fa-grin-beam"></i>{{/if}}
-      {{#if (eq this.category '餐飲食品')}}<i class="fas fa-utensils"></i>{{/if}}
-      {{#if (eq this.category '其他')}}<i class="fas fa-pen"></i>{{/if}}
-
-      {{ this.name }} -
-      {{ this.category }} -
-      {{ this.date }}  -
-      ${{ this.amount }}
-      <a href="./records/{{ this._id }}/edit">修改</a>
-      <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
-        <button type="submit">刪除</button>
+<div class="container col-6 mb-5">
+  <div class="row mt-3 mb-4">
+    <div class="col-auto mr-auto">
+      <a class="btn btn-primary" href="./records/new">新增支出</a>
+    </div>
+    <div class="col-5 ml-auto">
+      <form id="filter" action="/filters">
+        <div class="input-group">
+          <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon" name="category"
+            id="category" onchange="submit();">
+            <option value="{{ category }}" disabled selected>使用分類篩選</option>
+            {{#each categories}}
+            <option value="{{ this.name }}" {{#if (match ../category this.name)}}selected{{/if}}>{{ this.name }}</option>
+            {{/each}}
+          </select>
+        </div>
       </form>
-    </li>
-  {{/each}}
-</ul>
+    </div>
+  </div>
+  <ul class="list-group">
+    {{#each records}}
+      <li class="list-group-item shadow-sm">
+        <div class="row">
+          <div class="col-auto d-flex justify-content-center align-items-center category-icon">
+            {{#if (eq this.category '家居物業')}}<i class="fas fa-home"></i>{{/if}}
+            {{#if (eq this.category '交通出行')}}<i class="fas fa-shuttle-van"></i>{{/if}}
+            {{#if (eq this.category '休閒娛樂')}}<i class="fas fa-grin-beam"></i>{{/if}}
+            {{#if (eq this.category '餐飲食品')}}<i class="fas fa-utensils"></i>{{/if}}
+            {{#if (eq this.category '其他')}}<i class="fas fa-pen"></i>{{/if}}
+          </div>
+          <div class="col-auto mr-auto">
+            <h4>{{ this.name }}</h4>
+            {{ this.date }}
+          </div>
+          <div class="col-auto d-flex align-items-center">
+            ${{ this.amount }}
+          </div>
+          <div class="col-auto d-flex align-items-center">
+            <a class="btn btn-success mr-2" href="./records/{{ this._id }}/edit">修改</a>
+            <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+              <button class="btn btn-danger" type="submit">刪除</button>
+            </form>
+          </div>
+      </li>
+    {{/each}}
+  </ul>
 
-<a href="./records/new">新增支出</a>
+  
+</div>

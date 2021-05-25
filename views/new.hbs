@@ -1,12 +1,32 @@
-<form action="/records" method="POST">
-  <input type="text" placeholder="name" name="name">
-  <select name="category" id="category">
-    <option value="" disabled selected>選擇分類</option>
-    {{#each categories}}
-    <option value="{{ this.name }}">{{ this.name }}</option>
-    {{/each}}
-  </select>
-  <input type="text" placeholder="date" name="date">
-  <input type="text" placeholder="amount" name="amount">
-  <button type="submit">送出</button>
-</form>
+<div class="container col-4 mb-5">
+  <h1 class="text-center mb-5">請輸入你的支出</h1>
+  <form action="/records" method="POST">
+    <ul class="list-group mb-3">
+      <li class="list-group-item shadow-sm d-flex justify-content-around align-items-center">
+        <h5 class="m-2">名稱</h5>
+        <input class="col-6" type="text" placeholder="名稱" name="name" required>
+      </li>
+      <li class="list-group-item shadow-sm d-flex justify-content-around align-items-center">
+        <h5 class="m-2">分類</h5>
+        <select name="category" class="col-6 p-2" id="category" required>
+          <option value="" disabled selected>選擇支出分類</option>
+          {{#each categories}}
+          <option value="{{ this.name }}">{{ this.name }}</option>
+          {{/each}}
+        </select>
+      </li>
+      <li class="list-group-item shadow-sm d-flex justify-content-around align-items-center">
+        <h5 class="m-2">日期</h5>
+        <input class="col-6" type="date" placeholder="日期" name="date" required>
+      </li>
+      <li class="list-group-item shadow-sm d-flex justify-content-around align-items-center">
+        <h5 class="m-2">金額</h5>
+        <input class="col-6" type="number" placeholder="金額" name="amount" required>
+      </li>
+    </ul>
+    <div class="col-auto p-2 d-flex justify-content-center">
+      <a class="col-6 mr-2 btn btn-outline-primary" href="/">返回</a>
+      <button class="col-6 btn btn-primary" type="submit">送出</button>
+    </div>
+  </form>
+</div>

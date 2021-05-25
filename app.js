@@ -13,6 +13,8 @@ require('./config/mongoose')
 const app = express()
 const port = 3000
 
+// 設定可以使用靜態檔案路徑
+app.use(express.static('public'))
 
 // Handlebars 設定
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
