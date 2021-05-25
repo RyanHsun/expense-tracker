@@ -1,4 +1,7 @@
+.total-amount strong{
+  font-size: xxx-large;
+}
 .category-icon {
-  font-size: 2vw;
+  font-size: xx-large;
   width: 100px;
 }
