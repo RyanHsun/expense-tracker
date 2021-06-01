@@ -11,7 +11,7 @@ router.get('/new', (req, res) => {
     .then(categories => res.render('new', { categories }))
     .catch(error => console.error(error))
 })
-router.post('', (req, res) => {
+router.post('/', (req, res) => {
   const record = req.body
   return Record.create(record)
     .then(() => res.redirect('/'))
