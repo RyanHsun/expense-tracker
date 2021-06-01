@@ -4,8 +4,11 @@
     <div class="col-auto mr-auto">
       <a class="new-btn btn btn-warning" href="./records/new">新增支出</a>
     </div>
-    <div class="col-lg-5 col-sm-6 col-7 ml-auto">
-      <form id="filter" action="/filters">
+    <div class="col-lg-5 col-sm-4 col-6 ml-auto filters-wrapper">
+      {{#if category}}
+      <a class="back-btn" href="/">返回查看全部</a>
+      {{/if}}
+      <form id="filters" action="/filters">
         <select class="col-auto form-control" name="category" id="category" onchange="submit();">
           <option value="{{ category }}" disabled selected>使用分類篩選</option>
           {{#each categories}}
@@ -35,13 +38,32 @@
           </div>
           <div class="col-md-auto col-12 d-flex justify-content-end align-items-center">
             <a class="btn btn-success mr-2" href="./records/{{ this._id }}/edit">修改</a>
-            <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
-              <button class="btn btn-danger" type="submit">刪除</button>
-            </form>
+            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#modal-{{ this._id}}">刪除</button>
           </div>
+          <!-- Modal -->
+          <div class="modal fade" id="modal-{{ this._id}}" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  確定要刪除這筆支出嗎？
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="back-btn" data-dismiss="modal">取消</button>
+                  <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+                    <button type="submit" class="btn btn-danger">確定刪除</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </li>
     {{/each}}
   </ul>
-
-  
 </div>

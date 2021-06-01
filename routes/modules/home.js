@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     .sort({ date: 'desc' })
     .then((records) => {
       for (let i = 0; i < records.length; i++) {
-          totalAmount += Number(records[i].amount)
+        totalAmount += Number(records[i].amount)
       }
       Category.find()
         .lean()
@@ -21,6 +21,4 @@ router.get('/', (req, res) => {
     })
     .catch(error => console.error(error))
 })
-
-
 module.exports = router

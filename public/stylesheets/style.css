@@ -8,3 +8,42 @@
   font-size: xx-large;
   width: 100px;
 }
+.filters-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-width: 250px;
+}
+#filters {
+  width: 100%;
+}
+.back-btn {
+  margin-bottom: .3rem;
+  color: #78c2ad;
+  border: none;
+  background: none;
+}
+.back-btn:hover {
+  color: #6cc3d5;
+  text-decoration: none;
+}
+.back-btn::before {
+  content: "←";
+  display: inline-block;
+  transform: translateX(-5px);
+}
+.back-btn:hover::before {
+  animation: backBtn .8s infinite ease;
+}
+.modal-header,
+.modal-footer {
+  border: none;
+}
+.modal-body {
+  font-size: 20px;
+  text-align: center;
+}
+@keyframes backBtn {
+  from {transform: translateX(-5px);}
+  to {transform: translateX(-8px);}
+}

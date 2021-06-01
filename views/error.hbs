@@ -3,18 +3,19 @@
     <div class="col-auto mr-auto">
       <a class="new-btn btn btn-warning" href="./records/new">新增支出</a>
     </div>
-    <div class="col-lg-5 col-sm-6 col-7 ml-auto">
-      <form id="filter" action="/filters">
-        <div class="input-group">
-          <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon"
-            name="category" id="category" onchange="submit();">
-            <option value="{{ category }}" disabled selected>使用分類篩選</option>
-            {{#each categories}}
-            <option value="{{ this.name }}" {{#if (match ../category this.name)}}selected{{/if}}>{{ this.name }}
-            </option>
-            {{/each}}
-          </select>
-        </div>
+    <div class="col-lg-5 col-sm-6 col-7 ml-auto filters-wrapper">
+      {{#if category}}
+      <a class="back-btn" href="/">返回查看全部</a>
+      {{/if}}
+      <form id="filters" action="/filters">
+        <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon"
+          name="category" id="category" onchange="submit();">
+          <option value="{{ category }}" disabled selected>使用分類篩選</option>
+          {{#each categories}}
+          <option value="{{ this.name }}" {{#if (match ../category this.name)}}selected{{/if}}>{{ this.name }}
+          </option>
+          {{/each}}
+        </select>
       </form>
     </div>
   </div>
